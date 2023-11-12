@@ -48,19 +48,19 @@ typedef struct _Point{
 } Point;
 
 int		getKey();
-void		gotoxy(int row, int column);
+void	gotoxy(int row, int column);
 int		checkTimer(int cTime);
 int		copyGround(int (*source)[MY_WIDTH], int (*target)[MY_WIDTH]);
 
-void		init();
-void		copybasGroundTodisGround(int addBlock);
-void		displayGround();
-void		getChangeBlockPointDir(int key, Point *cur, int *dir);
+void	init();
+void	copybasGroundTodisGround(int addBlock);
+void	displayGround();
+void	getChangeBlockPointDir(int key, Point *cur, int *dir);
 int		changeBlock(Point cur, int dir);
 
-void		newBlock();
-void		removeLine();
+void	newBlock();
+void	removeLine();
 int		checkFinish();
-void		gameOver();
+void	gameOver();
 
 #endif
