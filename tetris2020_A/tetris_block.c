@@ -3,11 +3,11 @@
 
 
 Point	current;
-int		curBlock;
-int		curDir;
-int		basGround[MY_HIGH][MY_WIDTH];	//base
-int		disGround[MY_HIGH][MY_WIDTH];	//dispaly
-int		preGround[MY_HIGH][MY_WIDTH];	//previous
+int	curBlock;
+int	curDir;
+int	basGround[MY_HIGH][MY_WIDTH];	//base
+int	disGround[MY_HIGH][MY_WIDTH];	//dispaly
+int	preGround[MY_HIGH][MY_WIDTH];	//previous
 
 
 Point	blockPattern[MY_PATTERN_NUM][4][4] = {
