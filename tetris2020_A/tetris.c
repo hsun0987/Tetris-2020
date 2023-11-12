@@ -1,5 +1,5 @@
 /*
-** Å×Æ®¸®½º 2020
+** í…ŒíŠ¸ë¦¬ìŠ¤ 2020
 */
 
 #include"tetris.h"
@@ -9,11 +9,11 @@
 #include<Windows.h>
 
 extern Point	current;
-extern int		curBlock;
-extern int		curDir;
-extern int		basGround[MY_HIGH][MY_WIDTH];	//base
-extern int		disGround[MY_HIGH][MY_WIDTH];	//dispaly
-extern int		preGround[MY_HIGH][MY_WIDTH];	//previous
+extern int	curBlock;
+extern int	curDir;
+extern int	basGround[MY_HIGH][MY_WIDTH];	//base
+extern int	disGround[MY_HIGH][MY_WIDTH];	//dispaly
+extern int	preGround[MY_HIGH][MY_WIDTH];	//previous
 
 
 extern Point	blockPattern[MY_PATTERN_NUM][4][4];
@@ -22,7 +22,7 @@ extern Point	blockPattern[MY_PATTERN_NUM][4][4];
 int main(){
 
 	Point	cur;
-	int		dir, key;
+	int	dir, key;
 
 	CONSOLE_CURSOR_INFO CurInfo;
 	CurInfo.dwSize = 1;
@@ -33,10 +33,10 @@ int main(){
 
 	srand(time(NULL));
 	
-	//base ground¸¦ ÃÊ±âÈ­ ÇÑ´Ù.
+	//base groundë¥¼ ì´ˆê¸°í™” í•œë‹¤.
 	init();
 
-	//ºí·°À» ·£´ıÇÏ°Ô ¼±ÅÃÇÑ ÈÄ, Ãâ·ÂÇÑ´Ù.
+	//ë¸”ëŸ­ì„ ëœë¤í•˜ê²Œ ì„ íƒí•œ í›„, ì¶œë ¥í•œë‹¤.
 	newBlock();
 	copybasGroundTodisGround(MY_ADD_BLOCK);
 	displayGround();
@@ -46,40 +46,40 @@ int main(){
 		dir = curDir;
 		
 		if( checkTimer(1000) == MY_TIME_OVER ){ 
-				// Å°º¸µå ÀÔ·Â ¾øÀÌ 1ÃÊ°¡ °æ°úÇÏ¸é 
-				// ºí·°À» ÇÑÄ­ ¾Æ·¡·Î ³»¸°´Ù.
-				key = MY_KEY_DOWN;
+			// í‚¤ë³´ë“œ ì…ë ¥ ì—†ì´ 1ì´ˆê°€ ê²½ê³¼í•˜ë©´ 
+			// ë¸”ëŸ­ì„ í•œì¹¸ ì•„ë˜ë¡œ ë‚´ë¦°ë‹¤.
+			key = MY_KEY_DOWN;
 		}
 		else key= getKey();
 		
 		if( key != MY_KEY_NOT ){
-			// Å°º¸µå ÀÔ·ÂÀÌ ÀÖÀ¸¸é, 
-			// ÇØ´ç Å° °ª¿¡ µû¶ó ºí·°ÀÌ ÀÌµ¿ÇÒ ÁÂÇ¥/È¸ÀüÀ» ÀÓ½Ã °è»êÇÑ´Ù.
+			// í‚¤ë³´ë“œ ì…ë ¥ì´ ìˆìœ¼ë©´, 
+			// í•´ë‹¹ í‚¤ ê°’ì— ë”°ë¼ ë¸”ëŸ­ì´ ì´ë™í•  ì¢Œí‘œ/íšŒì „ì„ ì„ì‹œ ê³„ì‚°í•œë‹¤.
 			getChangeBlockPointDir(key, &cur, &dir);
 
-			// ÀÓ½Ã °è»ê °ªÀ» ¹ÙÅÁÀ¸·Î ºí·° ÀÌµ¿ÀÌ °¡´ÉÇÑÁö È®ÀÎÇÑ´Ù.
+			// ì„ì‹œ ê³„ì‚° ê°’ì„ ë°”íƒ•ìœ¼ë¡œ ë¸”ëŸ­ ì´ë™ì´ ê°€ëŠ¥í•œì§€ í™•ì¸í•œë‹¤.
 			if( changeBlock(cur,dir) == MY_MOVE_ON ){
-				//ÀÌµ¿ÀÌ °¡´ÉÇÏ¸é, ºí·°À» ÀÌµ¿½ÃÅ°°í Ãâ·ÂÇÑ´Ù.
+				//ì´ë™ì´ ê°€ëŠ¥í•˜ë©´, ë¸”ëŸ­ì„ ì´ë™ì‹œí‚¤ê³  ì¶œë ¥í•œë‹¤.
 				copybasGroundTodisGround(MY_ADD_BLOCK);
 				displayGround();				
 			}
 			else if( key == MY_KEY_DOWN ){
-				//ÀÌµ¿ÀÌ ºÒ°¡´É ÇÏ°í, ÀÔ·Â Å° °ªÀÌ DOWNÀÌ¸é
-				//base ground¿¡ ÇØ´ç ºÒ·°À» Ãß°¡ÇÑ´Ù.
+				//ì´ë™ì´ ë¶ˆê°€ëŠ¥ í•˜ê³ , ì…ë ¥ í‚¤ ê°’ì´ DOWNì´ë©´
+				//base groundì— í•´ë‹¹ ë¶ˆëŸ­ì„ ì¶”ê°€í•œë‹¤.
 				copyGround(disGround, basGround);
 
-				//°ÔÀÓ ÆÇ ¾Æ·¡ºÎÅÍ Â÷·Ê·Î È®ÀÎÇÏ¸ç 
-				//»èÁ¦ÇÒ ¶óÀÎÀÌ ÀÖÀ¸¸é »èÁ¦ÇÑ´Ù.
+				//ê²Œì„ íŒ ì•„ë˜ë¶€í„° ì°¨ë¡€ë¡œ í™•ì¸í•˜ë©° 
+				//ì‚­ì œí•  ë¼ì¸ì´ ìˆìœ¼ë©´ ì‚­ì œí•œë‹¤.
 				removeLine();
 
-				//»õ·Î¿î ºí·°À» ¼±ÅÃÇÑ´Ù.
+				//ìƒˆë¡œìš´ ë¸”ëŸ­ì„ ì„ íƒí•œë‹¤.
 				newBlock();
 				if (checkFinish() == MY_MOVE_NOT){
-					//»õ·Î ¼±ÅÃÇÑ ºí·°À» °ÔÀÓÆÇ¿¡ Ãß°¡ÇÒ ¼ö ¾øÀ¸¸é
-					//°ÔÀÓÀÌ Á¾·áµÈ °ÍÀ¸·Î °£ÁÖÇÑ´Ù.
+					//ìƒˆë¡œ ì„ íƒí•œ ë¸”ëŸ­ì„ ê²Œì„íŒì— ì¶”ê°€í•  ìˆ˜ ì—†ìœ¼ë©´
+					//ê²Œì„ì´ ì¢…ë£Œëœ ê²ƒìœ¼ë¡œ ê°„ì£¼í•œë‹¤.
 					break;	
 				}
-				//»õ·Î Ãß°¡µÈ ºí·°À» Ãâ·ÂÇÏ°í °ÔÀÓÀ» °è¼ÓÇÑ´Ù.
+				//ìƒˆë¡œ ì¶”ê°€ëœ ë¸”ëŸ­ì„ ì¶œë ¥í•˜ê³  ê²Œì„ì„ ê³„ì†í•œë‹¤.
 				copybasGroundTodisGround(MY_ADD_BLOCK);
 				displayGround();				
 			}
