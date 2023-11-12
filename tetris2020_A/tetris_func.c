@@ -5,12 +5,12 @@
 #include<Windows.h>
 
 extern Point	current;
-extern int		curBlock;
-extern int		curDir;
+extern int	curBlock;
+extern int	curDir;
 
-extern int		basGround[MY_HIGH][MY_WIDTH];	//base
-extern int		disGround[MY_HIGH][MY_WIDTH];	//dispaly
-extern int		preGround[MY_HIGH][MY_WIDTH];	//previous
+extern int	basGround[MY_HIGH][MY_WIDTH];	//base
+extern int	disGround[MY_HIGH][MY_WIDTH];	//dispaly
+extern int	preGround[MY_HIGH][MY_WIDTH];	//previous
 
 
 extern Point	blockPattern[MY_PATTERN_NUM][4][4];
@@ -28,25 +28,24 @@ void init(){
 	}
 
 	for(k=0;k<MY_WIDTH;k++){
-		basGround[0][k]				= MY_WALL;
+		basGround[0][k]			= MY_WALL;
 		basGround[MY_HIGH -1][k]	= MY_WALL;
 	}
 	for(i=1; i<MY_HIGH -1 ; i++){
-		basGround[i][0]				= MY_WALL;
+		basGround[i][0]			= MY_WALL;
 		basGround[i][MY_WIDTH-1]	= MY_WALL;
 	}
 }
 
 void copybasGroundTodisGround(int addBlock){
-
 	int i, row, col;
 
 	copyGround(basGround, disGround);
 	
 	if( addBlock ){
 		for(i=0;i<4;i++){
-			row		= current.row		+ blockPattern[curBlock][curDir][i].row;
-			col		= current.column	+ blockPattern[curBlock][curDir][i].column;
+			row	= current.row		+ blockPattern[curBlock][curDir][i].row;
+			col	= current.column	+ blockPattern[curBlock][curDir][i].column;
 			disGround[row][col] = curBlock ; 
 		}
 	}
@@ -67,22 +66,22 @@ void displayGround(){
 					printf("  ");
 					break;
 				case MY_WALL:
-					printf("¡à");
+					printf("â–¡");
 					break;
 				case MY_BLOCK_1:
-					printf("¡á");
+					printf("â– ");
 					break;
 				case MY_BLOCK_2:
-					printf("¡á");
+					printf("â– ");
 					break;
 				case MY_BLOCK_3:
-					printf("¡á");
+					printf("â– ");
 					break;
 				case MY_BLOCK_4:
-					printf("¡á");
+					printf("â– ");
 					break;
 				case MY_BLOCK_5:
-					printf("¡á");
+					printf("â– ");
 					break;
 				default:
 					break;
@@ -95,7 +94,7 @@ void displayGround(){
 	gotoxy(MY_HIGH+3, 0);
 	printf("block : %4d, dir: %4d", curBlock, curDir);
 
-	//display ground¸¦ previous ground¿¡ º¹»ç
+	//display groundë¥¼ previous groundì— ë³µì‚¬
 	//copyGround(disGround, preGround);
 }
 
@@ -128,7 +127,7 @@ int _checkBlock(Point cur, int dir){
 
 	for(i=0;i<4;i++){
 
-		row		= cur.row		+ blockPattern[curBlock][dir][i].row;
+		row		= cur.row	+ blockPattern[curBlock][dir][i].row;
 		col		= cur.column	+ blockPattern[curBlock][dir][i].column;
 
 		if(basGround[row][col]  != MY_SPACE) return MY_MOVE_NOT;
@@ -138,7 +137,6 @@ int _checkBlock(Point cur, int dir){
 }
 
 int changeBlock(Point cur, int dir){
-
 	int result;
 
 	result = _checkBlock(cur, dir);
@@ -185,12 +183,12 @@ void removeLine(){
 			if( basGround[row][col] == MY_SPACE) break;
 		}
 		if(col == MY_WIDTH-1){
-			//row ¹øÂ° ¶óÀÎÀ» Áö¿î´Ù
+			//row ë²ˆì§¸ ë¼ì¸ì„ ì§€ìš´ë‹¤
 			downLine(row);
 			copybasGroundTodisGround(MY_NO_BLOCK);
 			displayGround();
 			_delay(500);
-			//Áö¿î ¶óÀÎºÎÅÍ ´Ù½Ã ÇÑ¹ø È®ÀÎÇÏµµ·Ï Ã³¸®ÇÑ´Ù.
+			//ì§€ìš´ ë¼ì¸ë¶€í„° ë‹¤ì‹œ í•œë²ˆ í™•ì¸í•˜ë„ë¡ ì²˜ë¦¬í•œë‹¤.
 			row++;
 		}
 	}
@@ -198,7 +196,7 @@ void removeLine(){
 
 int checkFinish(){
 	Point	cur;
-	int		dir;
+	int	dir;
 
 	getChangeBlockPointDir(MY_KEY_NOT, &cur, &dir);
 	return _checkBlock(cur, dir);
