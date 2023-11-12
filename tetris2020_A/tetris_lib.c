@@ -3,11 +3,11 @@
 #include<Windows.h>
 
 extern Point	current;
-extern int		curBlock;
-extern int		curDir;
-extern int		basGround[MY_HIGH][MY_WIDTH];	//base
-extern int		disGround[MY_HIGH][MY_WIDTH];	//dispaly
-extern int		preGround[MY_HIGH][MY_WIDTH];	//previous
+extern int	curBlock;
+extern int	curDir;
+extern int	basGround[MY_HIGH][MY_WIDTH];	//base
+extern int	disGround[MY_HIGH][MY_WIDTH];	//dispaly
+extern int	preGround[MY_HIGH][MY_WIDTH];	//previous
 
 
 extern Point	blockPattern[MY_PATTERN_NUM][4][4];
